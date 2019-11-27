@@ -24,8 +24,8 @@ Permet de filtrer par les paramètres de recherche donnés. Plusieurs paramètre
 
 # exclude() :
 Permet de filtrer par objets qui ne correspondent pas aux paramètres de recherche donnés.
-# exclude() 
-# retournera un ensemble de requêtes d'objets qui ne correspondent pas aux paramètres de recherche donnés,
+# exemple :  
+# exclude() retournera un ensemble de requêtes d'objets qui ne correspondent pas aux paramètres de recherche donnés,
       from events.models import Venue
       Venue.objects.exclude(name="South Stadium")
       <QuerySet [<Venue: West Park>, <Venue: North Stadium>, <Venue: East Park>]>
