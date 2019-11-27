@@ -10,7 +10,11 @@ L'API QuerySet de Django fournit un large éventail de méthodes et de fonctions
 
 # filter() :
 Permet de filtrer par les paramètres de recherche donnés. Plusieurs paramètres sont joints par des virgules ",".
-# exemples :
+# exemples : filter() retourne un ensemble de données ayant status=True ; 
+
+      from events.models import Venue
+      Venue.objects.filter(status=True)
+      <QuerySet [<Venue: West Park>, <Venue: North Stadium>, <Venue: East Park>]>
 
 #
 
@@ -68,8 +72,8 @@ Permet de modifier le classement par défaut du QuerySet.
 # reverse() :
 Permet de renverser l'ordre par défaut du QuerySet.
 # exemples : reverse() inverse le classement par défaut du QuerySet(suivant l'exemple precedent) :
-
-      >>> Event.objects.all().reverse()                     
+      from events.models import Event
+      Event.objects.all().reverse()                     
       <QuerySet [<Event: Test Event>, <Event: Club Presentation - Juniors>, <Event: Club Presentation - Seniors>, <Event: Gala Day>]>
 
 
@@ -78,8 +82,11 @@ Permet de renverser l'ordre par défaut du QuerySet.
 
 # distinct() :
 Permet d'effectuer une SELECTION DISTINCTE de requête pour éliminer les lignes en double
-# exemples :
+# exemples : distinct() retournera les tout les données une fois sans leurs doubles
 
+      from events.models import Event
+      Event.objects.all().distinct('nom')                     
+      <QuerySet [<Event: Test Event>, <Event: Club Presentation - Juniors>, <Event: Club Presentation - Seniors>, <Event: Gala Day>]>
 
 
 
@@ -87,29 +94,47 @@ Permet d'effectuer une SELECTION DISTINCTE de requête pour éliminer les lignes
 
 # values() :
 Permet de renvoiyer des dictionnaires au lieu d'instances de modèles.
-# exemples :
+# exemples :  values() retourne les dictionnaires Python, au lieu d'un objet QuerySet:
+      from events.models import Event
+      Event.objects.values()       
+      <QuerySet [{'id': 1, 'name': 'Test Event', 'event_date': datetime.datetime(2019, 8, 25, 22, 42, 15, tzinfo=<UTC>), 'venue_id': 1, 'manager_id': 1, 'description': "It's all happening here!"}, {'id': 2, 'name': 'Club Presentation - Juniors', 'event_date': datetime.datetime(2019, 8, 1, 12, 0, tzinfo=<UTC>), 'venue_id': 4, 'manager_id': 2, 'description': ''}]>
 
 
+# Vous pouvez également spécifier les champs que vous voulez renvoyer:
+      from events.models import Event
+      Event.objects.values('name','description') 
+      <QuerySet [{'name': 'Test Event', 'description': "It's all happening here!"}, {'name': 'Club Presentation - Juniors', 'description': ''}]>
 
 #
 
 # values_list() :
 Permet de retourner des tuples au lieu d'instances de modèle
-# exemples :
+# exemples : values_list()est le même que values(), sauf qu'il retourne des tuples:
+      from events.models import Event
+      Event.objects.values_list() 
+      <QuerySet [(1, 'Test Event', datetime.datetime(2019, 8, 25, 22, 42, 15, tzinfo=<UTC>), 1, 1, "It's all happening here!"), (2, 'Club Presentation - Juniors', datetime.datetime(2019, 8, 1, 12, 0, tzinfo=<UTC>), 4, 2, '')]>
 
-
-
-#
-
-# dates() :
-Permet de renvoiyer un QuerySet contenant toutes les dates disponibles dans la plage de dates spécifiée.
-# exemples :
-
-
-
+# Vous pouvez également spécifier les champs à renvoyer :
+      from events.models import Event
+      Event.objects.values_list('name')
+      <QuerySet [('Test Event',), ('Club Presentation - Juniors',)]>
 
 #
 
-# datetimes() :
+# dates() et  datetimes() :
 Permet de renvoiyer un QuerySet contenant toutes les dates disponibles dans la plage de dates et d'heures spécifiée.
-# exemples :
+
+# Vous utilisez les méthodes dates()et datetimes()pour renvoyer des enregistrements limités dans le temps de la base de données (par exemple, tous les événements se produisant au cours d'un mois donné). Pour dates(), ces limites de temps sont year, month, weeket day. datetimes()ajoute hour, minuteet secondlimites. Quelques exemples:
+# exemple : 
+
+      from events.models import Event
+      Event.objects.dates('event_date', 'year')
+      <QuerySet [datetime.date(2019, 1, 1)]>
+      Event.objects.dates('event_date', 'month') 
+      <QuerySet [datetime.date(2019, 8, 1)]>
+      Event.objects.dates('event_date', 'week')  
+      <QuerySet [datetime.date(2019, 7, 29), datetime.date(2019, 8, 5), datetime.date(2019, 8, 19)]>
+      Event.objects.dates('event_date', 'day')  
+      <QuerySet [datetime.date(2019, 8, 1), datetime.date(2019, 8, 10), datetime.date(2019, 8, 11), datetime.date(2019, 8, 25)]>
+
+
