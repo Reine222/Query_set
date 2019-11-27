@@ -7,7 +7,7 @@ L'API QuerySet de Django fournit un large éventail de méthodes et de fonctions
 
 # filter() :
 Permet de filtrer par les paramètres de recherche donnés. Plusieurs paramètres sont joints par des virgules ",".
-*exemples :
+# exemples :
 
 
 
@@ -15,14 +15,14 @@ Permet de filtrer par les paramètres de recherche donnés. Plusieurs paramètre
 
 # exclude() :
 Permet de filtrer par objets qui ne correspondent pas aux paramètres de recherche donnés.
-*exemples :
+# exemples :
 
 
 
 
 # annotate() :
 Permet d'annotez chaque objet dans le QuerySet. Les annotations peuvent être des valeurs simples, une référence de champ ou une expression agrégée.
-*exemples :
+# exemples :
 
 
 
@@ -30,13 +30,13 @@ Permet d'annotez chaque objet dans le QuerySet. Les annotations peuvent être de
 
 # order_by() :
 Permet de modifier le classement par défaut du QuerySet.
-*exemples :
+# exemples :
 
 
 
 # reverse() :
 Permet de renverser l'ordre par défaut du QuerySet.
-*exemples :
+# exemples :
 
 
 
@@ -45,7 +45,7 @@ Permet de renverser l'ordre par défaut du QuerySet.
 
 # distinct() :
 Permet d'effectuer une SELECTION DISTINCTE de requête pour éliminer les lignes en double
-*exemples :
+# exemples :
 
 
 
@@ -54,7 +54,7 @@ Permet d'effectuer une SELECTION DISTINCTE de requête pour éliminer les lignes
 
 # values() :
 Permet de renvoiyer des dictionnaires au lieu d'instances de modèles.
-*exemples :
+# exemples :
 
 
 
@@ -62,14 +62,14 @@ Permet de renvoiyer des dictionnaires au lieu d'instances de modèles.
 
 # values_list() :
 Permet de retourner des tuples au lieu d'instances de modèle
-*exemples :
+# exemples :
 
 
 
 
 # dates() :
 Permet de renvoiyer un QuerySet contenant toutes les dates disponibles dans la plage de dates spécifiée.
-*exemples :
+# exemples :
 
 
 
@@ -77,4 +77,4 @@ Permet de renvoiyer un QuerySet contenant toutes les dates disponibles dans la p
 
 # datetimes() :
 Permet de renvoiyer un QuerySet contenant toutes les dates disponibles dans la plage de dates et d'heures spécifiée.
-*exemples :
+# exemples :
